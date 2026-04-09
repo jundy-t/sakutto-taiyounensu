@@ -2,6 +2,9 @@ node_modules
 dist
 dist-ssr
 *.local
+
+# 共通データソースのキャッシュ（sync-shared-sources.mjs が生成）
+src/data/sources/
 .vscode/*
 .idea
 .DS_Store

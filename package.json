@@ -4,12 +4,14 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "predev": "node ../_template/scripts/sync-shared-sources.mjs",
     "dev": "vite",
+    "prebuild": "node ../_template/scripts/sync-shared-sources.mjs",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "tsx src/logic/usedAssetLife.test.ts && tsx src/logic/searchUsefulLife.test.ts && tsx src/logic/repairCapitalJudge.test.ts && tsx src/logic/treatmentDecision.test.ts && tsx src/logic/externalAudit.test.ts",
-    "data:update": "python -X utf8 scripts/parse-xml.py",
+    "data:update": "node ../_shared/data/sources/useful-life/build.mjs --force && node ../_template/scripts/sync-shared-sources.mjs",
     "deploy": "npm run build && node --env-file=.env scripts/deploy.mjs"
   },
   "dependencies": {
