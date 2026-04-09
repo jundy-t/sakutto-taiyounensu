@@ -1,0 +1,20 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vscode/*
+.idea
+.DS_Store
+*.log
+node_modules/.tmp
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+secrets/
+
+# Playwright/監査の作業成果物
+.playwright-mcp/
+audit-screenshots/
+.wrangler/

@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1e40af;
+  --color-primary-light: #3b82f6;
+  --color-primary-dark: #1e3a8a;
+  --color-accent: #059669;
+  --color-accent-light: #10b981;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-bg: #e8e0cc;
+  --color-card: #f5f0e1;
+  --color-border: #cabe9e;
+  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+}
+
+/* 日本語テキストの孤児文字・悪い折返し防止
+   - word-break: keep-all で単語途中の折返しを禁止（句読点で折る）
+   - overflow-wrap: anywhere で極端なケースは強制折返しにフォールバック */
+p {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* ハードコードされた bg-white / bg-gray-50 をクリーム色に再定義 */
+@layer utilities {
+  .bg-white { background-color: var(--color-card) !important; }
+  .bg-gray-50 { background-color: var(--color-bg) !important; }
+}
