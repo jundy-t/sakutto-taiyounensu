@@ -32,9 +32,9 @@ npm run data:update  # 耐用年数データを e-Gov API から更新
 
 ## データ更新
 
-耐用年数データの更新は Python スクリプト経由：
+耐用年数データの更新：
 ```bash
-python -X utf8 scripts/parse-xml.py
+npm run data:update  # e-Gov API から再取得して同期
 ```
 詳細は `.claude/skills/data-update/SKILL.md` を参照（Claude Code から自動起動）。
 
