@@ -14,6 +14,7 @@ import { BlueReturnQuestion } from "./components/treatment/BlueReturnQuestion";
 import { TreatmentResult } from "./components/treatment/TreatmentResult";
 import { UsedAssetCalculator } from "./components/used/UsedAssetCalculator";
 import { Button } from "./components/shared/Button";
+import { SeoExpandableSections } from "./components/sections/SeoExpandableSections";
 import type { UsefulLifeEntry } from "./data/usefulLifeTable";
 import { useUserProfile } from "./logic/useUserProfile";
 import { trackEntrySelect, trackSearchSelect } from "./lib/gtag";
@@ -462,6 +463,8 @@ export default function App() {
               </Button>
             </>
           )}
+
+          {screen === "entry" && <SeoExpandableSections />}
         </div>
       </main>
 

@@ -1,6 +1,31 @@
 @import "tailwindcss";
 
+/* デフォルト = ダークテーマ */
 @theme {
+  --color-bg: #0a0a0a;
+  --color-card: #1a1a1a;
+  --color-card-hover: #242424;
+  --color-border: #2a2a2a;
+  --color-text: #f5f5f5;
+  --color-text-muted: #a3a3a3;
+  --color-primary: #3b82f6;
+  --color-primary-light: #60a5fa;
+  --color-primary-dark: #2563eb;
+  --color-accent: #10b981;
+  --color-accent-light: #34d399;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, system-ui, sans-serif;
+}
+
+/* ライトテーマ用変数 (data-theme="light" 時にオーバーライド) */
+:root[data-theme="light"] {
+  --color-bg: #e8e0cc;
+  --color-card: #f5f0e1;
+  --color-card-hover: #ede4ce;
+  --color-border: #cabe9e;
+  --color-text: #1e293b;
+  --color-text-muted: #475569;
   --color-primary: #1e40af;
   --color-primary-light: #3b82f6;
   --color-primary-dark: #1e3a8a;
@@ -8,30 +33,55 @@
   --color-accent-light: #10b981;
   --color-warning: #d97706;
   --color-danger: #dc2626;
-  --color-bg: #e8e0cc;
-  --color-card: #f5f0e1;
-  --color-border: #cabe9e;
-  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, system-ui, sans-serif;
 }
 
 body {
   margin: 0;
   background-color: var(--color-bg);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* 日本語テキストの孤児文字・悪い折返し防止
-   - word-break: keep-all で単語途中の折返しを禁止（句読点で折る）
-   - overflow-wrap: anywhere で極端なケースは強制折返しにフォールバック */
+/* 日本語テキストの孤児文字・悪い折返し防止 */
 p {
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
 
-/* ハードコードされた bg-white / bg-gray-50 をクリーム色に再定義 */
+/* WCAG 2.4.7 Focus Visible — キーボード操作時のフォーカスリング保証
+   出典: knowledge/ui-design-knowledge/heuristics/wcag-essentials.md
+   個別コンポーネントの focus: クラスで上書き可能（@layer base は最低優先度） */
+@layer base {
+  button:focus-visible,
+  summary:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* ハードコード色をテーマ変数に追従させる（ダーク/ライト両対応）
+   個別コンポーネントの `bg-white` や `text-gray-800` 等を書き換えずに
+   テーマ切替に追従させるための共通上書き。全ツール統一。 */
 @layer utilities {
   .bg-white { background-color: var(--color-card) !important; }
   .bg-gray-50 { background-color: var(--color-bg) !important; }
+  .bg-gray-100 { background-color: var(--color-card-hover) !important; }
+  .text-gray-400,
+  .text-gray-500 { color: var(--color-text-muted) !important; }
+  .text-gray-600,
+  .text-gray-700,
+  .text-gray-800,
+  .text-gray-900,
+  .text-black { color: var(--color-text) !important; }
+  .border-gray-200,
+  .border-gray-300 { border-color: var(--color-border) !important; }
 }
