@@ -69,3 +69,12 @@ export function trackCapitalCalcDone(method: "kanbenho" | "special" | "statutory
 export function trackTreatmentDecision(amount: number, kind: string) {
   trackEvent("treatment_decision", { amount, kind });
 }
+
+// === 辞書検索(0件ヒット検出用) ===
+export function trackSearch(searchTerm: string, resultCount: number) {
+  if (typeof window.gtag !== "function") return;
+  window.gtag("event", "search", { search_term: searchTerm });
+  if (resultCount === 0) {
+    window.gtag("event", "search_no_results", { search_term: searchTerm });
+  }
+}

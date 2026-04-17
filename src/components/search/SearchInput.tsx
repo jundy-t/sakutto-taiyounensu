@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { searchByKeyword } from '../../logic/searchUsefulLife';
+import { trackSearch } from '../../lib/gtag';
 import type { UsefulLifeEntry } from '../../data/usefulLifeTable';
 
 interface Props {
@@ -22,6 +23,18 @@ const TYPE_ICONS: Record<string, string> = {
 
 export function SearchInput({ value, onChange, onSelect }: Props) {
   const candidates = useMemo(() => searchByKeyword(value), [value]);
+  const lastSentRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const term = value.trim();
+    if (term.length < 2) return;
+    const t = setTimeout(() => {
+      if (lastSentRef.current === term) return;
+      trackSearch(term, candidates.length);
+      lastSentRef.current = term;
+    }, 600);
+    return () => clearTimeout(t);
+  }, [value, candidates.length]);
 
   return (
     <div className="space-y-3">
