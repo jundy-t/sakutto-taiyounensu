@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
+import { PortalBanner } from "./components/layout/PortalBanner";
 import { EntrySelector } from "./components/layout/EntrySelector";
 import { SearchInput } from "./components/search/SearchInput";
 import { PopularShortcuts } from "./components/search/PopularShortcuts";
@@ -15,9 +16,10 @@ import { TreatmentResult } from "./components/treatment/TreatmentResult";
 import { UsedAssetCalculator } from "./components/used/UsedAssetCalculator";
 import { Button } from "./components/shared/Button";
 import { SeoExpandableSections } from "./components/sections/SeoExpandableSections";
+import { FeedbackSection } from "./components/shared/FeedbackSection";
 import type { UsefulLifeEntry } from "./data/usefulLifeTable";
 import { useUserProfile } from "./logic/useUserProfile";
-import { trackEntrySelect, trackSearchSelect } from "./lib/gtag";
+import { trackEntrySelect, trackSearchSelect, trackToolExecute } from "./lib/gtag";
 import {
   decideTreatment,
   type TreatmentDecision,
@@ -64,6 +66,19 @@ export default function App() {
     };
     return decideTreatment({ amount: bAmount, profile: userProfile });
   }, [bAmount, profile]);
+
+  // 結果画面到達時に tool_execute を 1 回だけ発火
+  const lastExecutedScreenRef = useRef<Screen | null>(null);
+  useEffect(() => {
+    const resultScreens: Screen[] = ["result", "b_result_small", "b_result_mid", "used"];
+    if (resultScreens.includes(screen) && lastExecutedScreenRef.current !== screen) {
+      trackToolExecute();
+      lastExecutedScreenRef.current = screen;
+    }
+    if (screen === "entry") {
+      lastExecutedScreenRef.current = null;
+    }
+  }, [screen]);
 
   // 共通リセット
   const resetSearchState = useCallback(() => {
@@ -163,6 +178,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-bg">
+      <PortalBanner />
       <Header onHomeClick={goHome} />
 
       <main className="flex-1">
@@ -465,6 +481,10 @@ export default function App() {
           )}
 
           {screen === "entry" && <SeoExpandableSections />}
+
+          {(["entry", "result", "b_result_small", "b_result_mid", "used"] as Screen[]).includes(screen) && (
+            <FeedbackSection context={{ screen }} />
+          )}
         </div>
       </main>
 
