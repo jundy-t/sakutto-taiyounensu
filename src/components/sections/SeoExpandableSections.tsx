@@ -22,6 +22,14 @@ const FAQS = [
     a: '減価償却とは、資産の取得価額を使用可能期間にわたって各年分の必要経費として配分する手続きです\n（国税庁 No.2100）。\n\n耐用年数は「減価償却資産の耐用年数等に関する省令」別表第一・第三で資産の種類ごとに法定されており、個人事業主は原則として定額法で計算します。\n\n対象外となるのは土地・骨董品・美術品など時の経過で価値が減少しないもの。',
   },
   {
+    q: '検索してもヒットしない資産があります。どうすればよいですか？',
+    a: '「該当する資産が見つかりません」と表示された場合は、別のキーワード（例: 「PC」→「パソコン」など表記ゆれ）や、「カテゴリーから探す」画面からの検索をお試しください。\n\nヒットしなかった検索ワードは個人を特定できない形で匿名集計し、今後の辞書拡充の参考にさせていただきます。',
+  },
+  {
+    q: '入力した内容は外部に送信されますか？',
+    a: '判定処理はすべてブラウザ内で完結し、入力された資産名や金額は外部サーバーへ送信されません。\n\nただし、検索ワードは Google Analytics 経由で匿名集計（個人を特定できない形）しており、辞書拡充や利用状況の把握に活用しています。',
+  },
+  {
     q: 'エアコンの耐用年数は何年？',
     a: '事業用のエアコン（冷房用又は暖房用機器）の法定耐用年数は「器具及び備品」の区分で6年です\n（別表第一）。\n\nただし、建物に組み込まれた中央空調方式の冷暖房設備（建物附属設備）は13年（冷凍機の出力が22kW以下の場合）となり、分類が異なります。本ツールで資産の種類を選ぶと正しい分類で判定されます。',
   },
@@ -35,7 +43,7 @@ const FAQS = [
   },
   {
     q: '車（普通自動車）の耐用年数は何年？',
-    a: '事業用の普通自動車（乗用車）の法定耐用年数は6年です\n（別表第一「車両及び運搬具」）。\n\n小型車（総排気量0.66リットル以下＝軽自動車）は4年、貨物自動車（ダンプ式）は4年、その他貨物自動車は5年です。運送事業用・貸自動車業用の小型車は3年と短くなります。',
+    a: '事業用の普通自動車（乗用車）の法定耐用年数は6年です\n（別表第一「車両及び運搬具」）。\n\n軽自動車（総排気量0.66リットル以下）は4年、貨物自動車（ダンプ式）は4年、その他貨物自動車は5年です。\n\n運送事業用・貸自動車業用・自動車教習所用は別区分で短く、小型車（貨物2トン以下／乗用2リットル以下）は3年、その他のものは4年、大型乗用車（3リットル以上）は5年となります。',
   },
   {
     q: '中古車の耐用年数の計算方法は？',
@@ -79,7 +87,7 @@ const FAQS = [
   },
   {
     q: '少額減価償却資産の特例とは？（10万・20万・40万ルール）',
-    a: '結論：取得価額に応じて3段階の特例があります\n（国税庁 No.2100・No.5408、租税特別措置法第28条の2）。\n\n・10万円未満：取得時に全額を必要経費算入可（誰でも）\n・10万円以上20万円未満：一括償却資産として3年間均等償却可（誰でも）\n・20万円以上40万円未満：青色申告者の個人事業主・中小企業者(従業員400人以下)は全額即時経費算入可（年間合計300万円まで）※令和8年4月1日以後取得分\n\n令和8年度税制改正により、令和8年(2026年)4月1日以後取得分から上限が30万円→40万円に拡大、適用期限も令和11年(2029年)3月31日まで3年延長されました。令和8年3月31日以前取得分は旧30万円ルールが適用されます。\n\n白色申告者は20万円以上の即時経費化特例を利用できません。',
+    a: '結論：取得価額に応じて以下の特例があります\n（国税庁 No.2100・No.5408、租税特別措置法第28条の2）。\n\n・10万円未満：取得時に全額を必要経費算入可（白色・青色問わず誰でも）\n・10万円以上20万円未満：一括償却資産として3年間均等償却可（白色・青色問わず誰でも）\n・10万円以上40万円未満：青色申告の個人事業主（従業員1,000人以下）または中小法人（従業員400人以下）は全額即時経費算入可（年間合計300万円まで）※令和8年4月1日以後取得分\n\n10万円以上20万円未満の青色申告者は「一括償却資産（3年均等償却）」と「40万円特例（即時経費）」のどちらかを選択できます。償却資産税の扱いが異なるため後述のFAQ参照。\n\n令和8年度税制改正により、令和8年(2026年)4月1日以後取得分から上限が30万円→40万円に拡大、適用期限も令和11年(2029年)3月31日まで3年延長されました。同時に対象法人の従業員数要件も500人以下→400人以下に厳格化（個人事業主は従来通り1,000人以下で変更なし）。令和8年3月31日以前取得分は旧30万円ルールが適用されます。\n\n白色申告者は10万円以上の即時経費化特例（40万円特例）を利用できません（一括償却資産は選択可）。',
   },
   {
     q: '少額減価償却資産特例の適用期限はいつまで？',
@@ -87,23 +95,15 @@ const FAQS = [
   },
   {
     q: '少額減価償却資産特例の年間上限300万円ルールとは？',
-    a: '結論：1事業年度（個人事業主は1暦年）あたり、特例適用の取得価額合計は300万円までです。\n\n例えば30万円のパソコンを11台買った場合、合計330万円のうち300万円までが特例対象（=10台分まで全額経費化、残り1台は通常の減価償却）。\n\n年度内で300万円を超えそうな場合は、超過分を一括償却資産（10万〜20万円帯）や通常の減価償却で処理します。年間上限300万円自体は令和8年度税制改正でも変更されていません（租税特別措置法第28条の2）。\n\n年の途中で開業した場合や、事業年度が1年に満たない法人は、月数按分で上限が圧縮される点にも注意。',
+    a: '結論：1事業年度（個人事業主は1暦年）あたり、特例適用の取得価額合計は300万円までです。\n\n例えば30万円のパソコンを11台買った場合、合計330万円のうち300万円までが特例対象（=10台分まで全額経費化、残り1台は通常の減価償却で処理）。\n\n年度内で300万円を超えそうな場合は、超過分を通常の減価償却で処理します。一括償却資産（3年均等償却）は10万円以上20万円未満の資産のみ対象なので、30万円超の超過分には適用できません（10万円以上20万円未満の資産であれば一括償却資産も選択肢）。年間上限300万円自体は令和8年度税制改正でも変更されていません（租税特別措置法第28条の2）。\n\n年の途中で開業した場合や、事業年度が1年に満たない法人は、月数按分で上限が圧縮される点にも注意。',
   },
   {
     q: '少額減価償却資産は償却資産税（固定資産税）の対象になる？',
-    a: '結論：10万円未満の即時経費化と一括償却資産（10〜20万円・3年均等償却）は償却資産税の対象外。20〜40万円の少額減価償却資産特例で即時経費化したものは償却資産税の対象（地方税法第341条・施行令第49条）。\n\nつまり「税務上は全額即時経費化したのに、市町村に償却資産として申告し、固定資産税を払う必要がある」という独自の取扱いに注意。\n\n対象外（償却資産税かからない）:\n・10万円未満の少額減価償却資産\n・10〜20万円の一括償却資産\n\n対象（償却資産税かかる）:\n・20〜40万円の少額減価償却資産特例\n・通常の減価償却資産\n\n償却資産の合計が事業所ごとに150万円未満なら、固定資産税(償却資産)は実質ゼロ（免税点）。詳しくは各市町村の固定資産税(償却資産)申告窓口で確認してください。',
+    a: '結論：10万円未満の即時経費化と一括償却資産（10〜20万円・3年均等償却）は償却資産税の対象外。10〜40万円の少額減価償却資産特例（青色申告で選択した場合）は償却資産税の対象（地方税法第341条・施行令第49条）。\n\nつまり「税務上は全額即時経費化したのに、市町村に償却資産として申告し、固定資産税を払う必要がある」という独自の取扱いに注意。10〜20万円帯では「一括償却資産」を選ぶか「40万円特例」を選ぶかで償却資産税の扱いが分岐します。\n\n対象外（償却資産税かからない）:\n・10万円未満の少額減価償却資産（即時経費）\n・10〜20万円の一括償却資産（3年均等償却を選択した場合）\n\n対象（償却資産税かかる）:\n・10〜40万円の少額減価償却資産特例（青色申告で40万円特例を選択した場合）\n・通常の減価償却資産\n\n償却資産の合計が事業所ごとに150万円未満なら、固定資産税(償却資産)は実質ゼロ（免税点）。詳しくは各市町村の固定資産税(償却資産)申告窓口で確認してください。',
   },
   {
     q: '取得価額に消費税は含める？',
     a: '取得価額の判定（10万円未満・20万円未満・40万円未満※令和8年4月1日以後取得分）は、事業者の経理方式による判定となります\n（国税庁 No.2100）。\n\n税込経理を採用している場合は税込で判定、税抜経理を採用している場合は税抜で判定します。免税事業者は必然的に税込処理となります。',
-  },
-  {
-    q: '検索してもヒットしない資産があります。どうすればよいですか？',
-    a: '「該当する資産が見つかりません」と表示された場合は、別のキーワード（例: 「PC」→「パソコン」など表記ゆれ）や、「カテゴリーから探す」画面からの検索をお試しください。\n\nヒットしなかった検索ワードは個人を特定できない形で匿名集計し、今後の辞書拡充の参考にさせていただきます。',
-  },
-  {
-    q: '入力した内容は外部に送信されますか？',
-    a: '判定処理はすべてブラウザ内で完結し、入力された資産名や金額は外部サーバーへ送信されません。\n\nただし、検索ワードは Google Analytics 経由で匿名集計（個人を特定できない形）しており、辞書拡充や利用状況の把握に活用しています。',
   },
 ];
 
@@ -198,28 +198,28 @@ export function SeoExpandableSections() {
         <p>本ツールの判定は以下の一次情報に基づいています。</p>
         <ul className="list-disc pl-5 space-y-1 pt-2">
           <li>
-            <a href="https://laws.e-gov.go.jp/law/340M50000040015" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">
+            <a href="https://laws.e-gov.go.jp/law/340M50000040015" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">
               e-Gov 法令検索 — 減価償却資産の耐用年数等に関する省令
             </a>
             （別表第一・第三、本ツールのデータソース）
           </li>
           <li>
-            <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2100.htm" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">
+            <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2100.htm" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">
               国税庁 タックスアンサー No.2100（減価償却のあらまし）
             </a>
           </li>
           <li>
-            <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5404.htm" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">
+            <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5404.htm" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">
               国税庁 タックスアンサー No.5404（中古資産の耐用年数）
             </a>
           </li>
           <li>
-            <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5408.htm" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">
+            <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5408.htm" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">
               国税庁 タックスアンサー No.5408（少額減価償却資産の特例）
             </a>
           </li>
           <li>
-            <a href="https://www.nta.go.jp/law/tsutatsu/kihon/santeiho/01/01.htm" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">
+            <a href="https://www.nta.go.jp/law/tsutatsu/kihon/santeiho/01/01.htm" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">
               耐用年数の適用等に関する取扱通達（端数処理・資本的支出）
             </a>
           </li>
@@ -242,7 +242,7 @@ export function SeoExpandableSections() {
           <li>送信内容: アクセス情報(IPアドレス等は Google が匿名化)</li>
           <li>送信先: Google LLC(米国)</li>
           <li>利用目的: アクセス解析・利用状況の把握</li>
-          <li>オプトアウト: ブラウザの Cookie 削除、または <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">Google アナリティクス オプトアウト アドオン</a> の利用</li>
+          <li>オプトアウト: ブラウザの Cookie 削除、または <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">Google アナリティクス オプトアウト アドオン</a> の利用</li>
         </ul>
 
         <p className="font-medium text-text mt-3">第三者提供</p>
@@ -258,7 +258,7 @@ export function SeoExpandableSections() {
         <p>個人情報の取扱に関するお問い合わせは、以下のいずれかからお送りください。</p>
         <ul className="list-disc pl-5 space-y-1">
           <li>画面下部のフィードバックフォーム(判定実行後に表示)</li>
-          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScc8N9cXAAl5hytpJJWggLxg0k58EygghJAZfgrUuv99my7pQ/viewform" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">Google フォーム(常時アクセス可能)</a></li>
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScc8N9cXAAl5hytpJJWggLxg0k58EygghJAZfgrUuv99my7pQ/viewform" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">Google フォーム(常時アクセス可能)</a></li>
         </ul>
 
         <ul className="space-y-1 mt-3 text-xs opacity-70">
@@ -270,7 +270,7 @@ export function SeoExpandableSections() {
       <DetailSection title="運営者情報">
         <ul className="space-y-1">
           <li><strong>サービス名:</strong> サクッと耐用年数</li>
-          <li><strong>運営:</strong> <a href="https://haraochi.jp/" target="_blank" rel="noopener noreferrer" className="underline hover:text-text">サクッと</a>（個人事業主・フリーランス向け無料ツール集）</li>
+          <li><strong>運営:</strong> <a href="https://haraochi.jp/" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:underline">サクッと</a>（個人事業主・フリーランス向け無料ツール集）</li>
           <li><strong>最終更新:</strong> {LAST_UPDATED}</li>
         </ul>
       </DetailSection>
