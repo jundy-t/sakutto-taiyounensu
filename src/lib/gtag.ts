@@ -24,6 +24,11 @@ export function trackEntrySelect(entry: "A" | "B") {
   trackEvent("entry_select", { entry });
 }
 
+// === 実行完了(結果画面到達) ===
+export function trackToolExecute() {
+  trackEvent("tool_execute");
+}
+
 // === 検索/候補選択 ===
 export function trackSearchSelect(entryId: string) {
   trackEvent("search_select", { entry_id: entryId });

@@ -25,7 +25,7 @@ export function BlueReturnQuestion({
           もう少し教えてください
         </h2>
         <p className="text-sm text-gray-600">
-          30万円特例（即時経費）の適用判定に必要です。
+          少額減価償却資産特例（即時経費・40万円未満）の適用判定に必要です。
         </p>
       </div>
 

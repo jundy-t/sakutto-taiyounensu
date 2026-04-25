@@ -57,8 +57,8 @@ export default function App() {
   // 判定結果（メモ化）
   const decision: TreatmentDecision | null = useMemo(() => {
     if (bAmount === null || !profile.accountingMethod) return null;
-    // 30万円特例の判定に必要なreturnType/entityTypeが未入力の場合、
-    // 一旦白色・大法人としてプレースホルダ判定（10万円未満や30万円以上は影響しない）
+    // 少額減価償却資産特例(40万円未満)の判定に必要なreturnType/entityTypeが未入力の場合、
+    // 一旦白色・大法人としてプレースホルダ判定（10万円未満や上限以上は影響しない）
     const userProfile: UserProfile = {
       accountingMethod: profile.accountingMethod,
       returnType: profile.returnType ?? "white",

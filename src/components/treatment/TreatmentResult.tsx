@@ -34,7 +34,7 @@ const ENTITY_TYPE_LABEL: Record<EntityType, string> = {
 const OPTION_ICONS = {
   immediate_expense: "✅",
   lump_sum: "📅",
-  special_300k: "⭐",
+  special_threshold: "⭐",
   regular_depreciation: "📊",
 } as const;
 
@@ -86,7 +86,7 @@ export function TreatmentResult({
         </h3>
         {options.map((opt) => {
           const isImmediate =
-            opt.type === "immediate_expense" || opt.type === "special_300k";
+            opt.type === "immediate_expense" || opt.type === "special_threshold";
           const isRecommended = opt.recommendation === 3;
           return (
             <div
@@ -130,21 +130,29 @@ export function TreatmentResult({
         })}
       </div>
 
-      {/* 30万円特例の追加注意（青色＋中小法人/個人で30万円特例が含まれる時のみ） */}
-      {options.some((o) => o.type === "special_300k") && (
+      {/* 少額減価償却資産特例の追加注意（青色＋中小法人/個人で特例が含まれる時のみ） */}
+      {options.some((o) => o.type === "special_threshold") && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-2">
           <div className="font-bold text-amber-900 text-sm">
-            ⚠ 30万円特例の注意事項
+            ⚠ {decision.ruleVariant === "new_400k" ? "40万円特例" : "30万円特例"}の注意事項
           </div>
           <p className="text-xs text-amber-800">
             以下のいずれかに該当する場合は適用できません：
           </p>
           <ul className="text-xs text-amber-800 space-y-1 list-disc list-inside">
-            <li>常時使用する従業員数が500人を超える法人（個人事業主は1,000人）</li>
+            <li>
+              常時使用する従業員数が
+              {decision.ruleVariant === "new_400k" ? "400人" : "500人"}
+              を超える法人（個人事業主は1,000人）
+            </li>
             <li>通算法人</li>
             <li>貸付用の資産（主要事業を除く）</li>
-            <li>今年度の30万円特例の累計が300万円を超える</li>
-            <li>令和8年4月1日以降に取得した資産（特例期限切れ）</li>
+            <li>今年度の特例累計が300万円を超える</li>
+            <li>
+              {decision.ruleVariant === "new_400k"
+                ? "令和11年4月1日以降に取得した資産（適用期限切れ）"
+                : "令和8年4月1日以降に取得した資産（旧30万円ルールの期限切れ・新40万円ルールへ移行）"}
+            </li>
           </ul>
           <p className="text-xs text-amber-700 pt-1">
             該当する場合は税理士・税務署にご相談ください。

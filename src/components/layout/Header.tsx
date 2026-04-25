@@ -17,7 +17,7 @@ export function Header({ onHomeClick }: HeaderProps) {
             サクッと耐用年数
           </h1>
           <p className="text-xs sm:text-sm text-text-muted mt-0.5 truncate">
-            減価償却の耐用年数を3クリックで判定
+            エアコン・建物・車・中古資産の耐用年数を3クリックで判定
           </p>
         </button>
         <div className="flex items-center gap-2 shrink-0">
